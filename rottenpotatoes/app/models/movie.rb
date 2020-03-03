@@ -4,6 +4,6 @@ class Movie < ActiveRecord::Base
   end
   
   def self.find_same_director director
-    return Movie.where(:director => director)
+    director.nil? ? nil : Movie.where(:director => director).to_a()
   end
 end
