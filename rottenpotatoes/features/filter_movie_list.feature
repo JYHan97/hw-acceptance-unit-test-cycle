@@ -32,10 +32,22 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I press "ratings_submit"
   Then I should see "The Incredibles"
   And I should see "The Terminator"
-  And I should not see "Alladin"
+  And I should not see "Aladdin"
   And I should not see "The Help"
 
 Scenario: all ratings selected
   When I check the following ratings: PG, R, G, PG-13
   And I press "ratings_submit"
   Then I should see all the movies
+
+Scenario: restrict to movies with 'G' or 'PG' ratings and sort movies alphabetically
+  When I check the following ratings: G, PG
+  And I uncheck the following ratings: R, PG-13
+  And I press "ratings_submit"
+  Then I should see "The Incredibles"
+  And I should not see "The Terminator"
+  And I should see "Aladdin"
+  And I should not see "The Help"
+  When I follow "Movie Title"
+  Then I should see "Aladdin" before "The Incredibles"
+
